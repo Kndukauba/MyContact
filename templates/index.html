@@ -1,0 +1,157 @@
+<!DOCTYPE html> 
+<html lang="en"> 
+ 
+<head>
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Budgetly</title> 
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+<script src="{{ url_for('static', filename='js/main.js') }}" defer></script>
+</head>
+
+<body>
+  <h1>Budgetly</h1> 
+
+  <h2>Users</h2>
+  <form id="userForm">
+      <input type="text" id="name" placeholder="Name" required><br>
+      <input type="email" id="email" placeholder="Email" required><br>
+      <input type="number" id="age" placeholder="Age" required><br>
+      <input type="text" id="income_level" placeholder="Income Level" required><br>
+      <input type="text" id="currency" placeholder="Currency" required><br>
+      <input type="text" id="risk_tolerance" placeholder="Risk Tolerance" required><br>
+      <input type="number" id="retirement_age_target" placeholder="Retirement Age" required><br>
+      <button type="submit">Add User</button>
+  </form>
+  <button onclick="fetchUsers()">Show Users</button>
+  <button onclick="deleteUsers()">Delete All Users</button>
+  <div id="usersList"></div>
+  <hr>
+
+
+  <h2>Accounts</h2>
+  <form id="accountForm">
+      <input type="text" id="bank" placeholder="Bank" required><br>
+      <input type="text" id="account_type" placeholder="Account Type" required><br>
+      <input type="number" id="account_number" placeholder="Account Number" required><br>
+      <input type="number" id="balance" placeholder="Balance" required><br>
+      <input type="text" id="account_currency" placeholder="Currency" required><br>
+      <input type="number" id="interest_rate" placeholder="Interest Rate" step="0.01" required><br>
+      <input type="number" id="credit_limit" placeholder="Credit Limit" required><br>
+      <button type="submit">Add Account</button>
+  </form>
+  <button onclick="fetchAccounts()">Show Accounts</button>
+  <button onclick="deleteAccounts()">Delete All Accounts</button>
+  <div id="accountsList"></div>
+  <hr>
+
+
+  <h2>Transactions</h2>
+  <form id="transactionForm">
+      <input type="number" id="amount" placeholder="Amount" required><br>
+      <input type="text" id="txn_type" placeholder="Transaction Type" required><br>
+      <input type="text" id="merchant" placeholder="Merchant" required><br>
+      <input type="text" id="description" placeholder="Description" required><br>
+      <input type="date" id="txn_date" placeholder="Transaction Date" required><br>
+      <input type="text" id="status" placeholder="Status" required><br>
+      <input type="text" id="payment_method" placeholder="Payment Method" required><br>
+      <button type="submit">Add Transaction</button>
+  </form>
+  <button onclick="fetchTransactions()">Show Transactions</button>
+  <button onclick="deleteTransactions()">Delete All Transactions</button>
+  <div id="transactionsList"></div>
+  <hr>
+
+
+  <h2>Categories</h2>
+  <form id="categoryForm">
+      <input type="text" id="category_name" placeholder="Category Name" required><br>
+      <input type="number" id="current_income" placeholder="Current Income" required><br>
+      <button type="submit">Add Category</button> 
+  </form>
+  <button onclick="fetchCategories()">Show Categories</button>
+  <button onclick="deleteCategories()">Delete All Categories</button>
+  <div id="categoriesList"></div>
+  <hr>
+
+
+  <h2>Budgets</h2>
+  <form id="budgetForm">
+      <input type="number" id="amount_limit" placeholder="Amount Limit" required><br>
+      <input type="date" id="timeframe" placeholder="Timeframe" required><br>
+      <button type="submit">Add Budget</button>
+  </form>
+  <button onclick="fetchBudgets()">Show Budgets</button>
+  <button onclick="deleteBudgets()">Delete All Budgets</button>
+  <div id="budgetsList"></div>
+  <hr>
+
+ 
+  <h2>Goals</h2>
+  <form id="goalForm">
+      <input type="text" id="goal_type" placeholder="Goal Type" required><br>
+      <input type="text" id="goal_name" placeholder="Goal Name" required><br>
+      <input type="number" id="target_amount" placeholder="Target Amount" required><br>
+      <input type="number" id="current_progress" placeholder="Current Progress" required><br>
+      <input type="date" id="target_date" placeholder="Target Date" required><br>
+      <input type="text" id="priority" placeholder="Priority" required><br>
+      <input type="text" id="strategy" placeholder="Strategy" required><br>
+      <button type="submit">Add Goal</button>
+  </form>
+  <button onclick="fetchGoals()">Show Goals</button>
+  <button onclick="deleteGoals()">Delete All Goals</button>
+  <div id="goalsList"></div>
+  <hr>
+
+
+  <h2>Recurring Transactions</h2>
+  <form id="recurringForm">
+      <input type="number" id="amount_recurring" placeholder="Amount" required><br>
+      <input type="text" id="frequency" placeholder="Frequency" required><br>
+      <input type="date" id="next_due" placeholder="Next Due" required><br>
+      <input type="date" id="end_date" placeholder="End Date" required><br>
+      <input type="text" id="description_recurring" placeholder="Description" required><br>
+      <input type="text" id="investment_auto" placeholder="Investment Auto" required><br>
+      <button type="submit">Add Recurring Transaction</button>
+  </form>
+  <button onclick="fetchRecurring()">Show Recurring Transactions</button>
+  <button onclick="deleteRecurring()">Delete All Recurring Transactions</button>
+  <div id="recurringList"></div>
+  <hr>
+
+
+  <h2>Investments</h2>
+  <form id="investmentForm">
+      <input type="text" id="investment_type" placeholder="Investment Type" required><br>
+      <input type="number" id="amount_investment" placeholder="Amount Invested" required><br>
+      <input type="number" id="current_value" placeholder="Current Value" required><br>
+      <input type="text" id="risk_level" placeholder="Risk Level" required><br>
+      <button type="submit">Add Investment</button>
+  </form>
+  <button onclick="fetchInvestments()">Show Investments</button>
+  <button onclick="deleteInvestments()">Delete All Investments</button>
+  <div id="investmentsList"></div>
+  <hr>
+
+
+  <h2>Advice</h2>
+  <form id="adviceForm">
+      <input type="text" id="advice_text" placeholder="Advice Text" required><br>
+      <input type="text" id="status_advice" placeholder="Status" required><br>
+      <button type="submit">Add Advice</button>
+  </form>
+  <button onclick="fetchAdvice()">Show Advice</button>
+  <button onclick="deleteAdvice()">Delete All Advice</button>
+  <div id="adviceList"></div>
+  <hr>
+
+
+  <h2>Reports</h2>
+  <form id="reportForm">
+    <input type="text" id="report_type" placeholder="Report Type" required><br>
+    <button type="submit">Add Report</button>
+  </form>
+  <button onclick="fetchReports()">Show Reports</button>
+  
+</body>
+</html>
